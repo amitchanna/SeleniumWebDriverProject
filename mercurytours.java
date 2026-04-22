@@ -1,12 +1,13 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.tracing.opentelemetry.SeleniumSpanExporter;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
+import org.apache.commons.io.FileUtils;
 
 public class mercurytours {
 @Test
@@ -21,6 +22,19 @@ public class mercurytours {
         String PageTitle = driver.getTitle();
 
         System.out.println("The title of the page is "+PageTitle);
+
+        TakesScreenshot takefirst = (TakesScreenshot) driver;
+
+        File source_one = takefirst.getScreenshotAs(OutputType.FILE);
+
+        File destination_one = new File("C:\\Users\\amit29\\OneDrive - Discovery\\Documents\\AmitChanna\\SeleniumTestReports\\screenshotone.jpg");
+        try {
+
+            FileUtils.copyFile(source_one, destination_one);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // Capture the mailing information
 
