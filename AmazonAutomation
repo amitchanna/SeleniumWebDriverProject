@@ -1,0 +1,64 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.Test;
+
+import java.time.Duration;
+
+public class amazonautomation {
+
+    @Test
+
+    public static void amazonuitest() {
+        WebDriver driver = new EdgeDriver();
+
+        driver.get("https://www.amazon.co.za");
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+        driver.findElement(By.xpath("//a[contains(text(),'Customer Service')]")).isDisplayed();
+
+        driver.findElement(By.xpath("//a[contains(text(),'Customer Service')]")).click();
+
+        driver.findElement(By.xpath("//h3[contains(.,'Your Account')]")).isDisplayed();
+
+        driver.findElement(By.xpath("//span[contains(.,'Return or exchange items')]")).isDisplayed();
+
+        driver.findElement(By.xpath("//div[@id='nav-cart-text-container']/span[2]")).click();
+
+        driver.findElement(By.linkText("Sign in")).isDisplayed();
+
+        driver.findElement(By.linkText("Sign in")).click();
+
+        // Capture details on log in page
+
+        driver.findElement(By.xpath("//input[@type='submit']")).isDisplayed();
+
+        driver.findElement(By.name("email")).isDisplayed();
+
+        driver.findElement(By.xpath("//h1[contains(.,'Sign in or create account')]")).isDisplayed();
+
+        driver.findElement(By.name("email")).sendKeys("+27643733837");
+
+        driver.findElement(By.xpath("//input[@type='submit']")).click();
+
+        driver.findElement(By.id("ap_password")).isDisplayed();
+
+        driver.findElement(By.id("signInSubmit")).isDisplayed();
+
+        driver.findElement(By.id("continue")).isDisplayed();
+
+        driver.findElement(By.id("ap_password")).sendKeys("Investec#1");
+        driver.findElement(By.id("signInSubmit")).click();
+
+
+
+
+
+
+
+    }
+}
+
+
