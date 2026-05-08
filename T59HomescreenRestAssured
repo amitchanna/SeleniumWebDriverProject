@@ -1,0 +1,79 @@
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.response.Response;
+import io.restassured.path.json.JsonPath;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
+
+public class GetHomescreenT59 {
+
+    @Test
+
+    public static void testhomescreen()
+    {
+        // Framing the request
+        RequestSpecification homescreen = RestAssured.given();
+
+        homescreen.headers("Content-Type", "application/json");
+        homescreen.headers("Authorization","Bearer a7adc21f-ad95-44e4-ba7e-c2bd7b11940f");
+        homescreen.headers("User-Agent", "VitalityActive/1.0.0.432/2.0 (iPhone 5,4; iOS 10.1)");
+
+        homescreen.baseUri("https://mdev.vitalitydeveloper.com");
+        homescreen.basePath("/api/vitality-home-screen-points-agreement-service-1/1.0/svc/59/getHomeScreenGetPointsGetStatus/5700739621/5750998106");
+
+
+        // Executing the request
+
+        Response response = homescreen.get();
+
+        String responsebody = response.getBody().asString();
+        int statuscode = response.getStatusCode();
+
+        System.out.println(responsebody);
+        System.out.println(statuscode);
+        Assert.assertEquals(statuscode,200);
+
+        // Testing the Business Rules
+
+        JsonPath jp = response.jsonPath();
+
+        String statusone = jp.getString("pointsToNextStatuses[0].statusCode");
+
+        Assert.assertEquals(statusone,"Bronze");
+
+        int pointsone = jp.getInt("pointsToNextStatuses[0].statusPoints");
+
+        Assert.assertEquals(pointsone,0);
+
+        String statustwo = jp.getString("pointsToNextStatuses[1].statusCode");
+
+        Assert.assertEquals(statustwo,"Silver");
+
+        int pointstwo = jp.getInt("pointsToNextStatuses[1].statusPoints");
+
+        Assert.assertEquals(pointstwo,3500);
+
+        String statusthree = jp.getString("pointsToNextStatuses[2].statusCode");
+
+        Assert.assertEquals(statusthree,"Gold");
+
+        int pointsthree = jp.getInt("pointsToNextStatuses[2].statusPoints");
+
+        Assert.assertEquals(pointsthree,7000);
+
+        String statusfour = jp.getString("pointsToNextStatuses[3].statusCode");
+
+        Assert.assertEquals(statusfour,"Platinum");
+
+        int pointsfour = jp.getInt("pointsToNextStatuses[3].statusPoints");
+
+        Assert.assertEquals(pointsfour,10000);
+
+
+
+
+
+
+    }
+}
