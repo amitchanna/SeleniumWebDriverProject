@@ -96,6 +96,12 @@ public class tricentistest {
 
             driver.findElement(By.xpath("//strong[contains(.,'Your order has been successfully processed!')]")).isDisplayed();
 
+            WebElement orderelement = driver.findElement(By.xpath("//li[contains(.,'Order number:')]"));
+
+            String ordernumber = orderelement.getText();
+
+            System.out.println(" The order number is: "+ordernumber);
+
 
 
         }
