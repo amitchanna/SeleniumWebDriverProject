@@ -1,0 +1,1 @@
+This contains correct library structure for rest assured test ng framework
