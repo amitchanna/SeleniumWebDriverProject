@@ -1,1 +1,2 @@
 This contains correct library structure for rest assured test ng framework
+Only 1 jar file is missing in the framework - httpclient-4.5.14.jar 
