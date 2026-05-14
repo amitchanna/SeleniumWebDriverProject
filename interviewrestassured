@@ -1,0 +1,60 @@
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.response.Response;
+import io.restassured.path.json.JsonPath;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
+import java.util.HashMap;
+import java.util.Map;
+
+public class apireqrestest {
+
+    @Test
+    public static void apitest()
+    {
+        RequestSpecification req = RestAssured.given();
+        req.headers("x-api-key","free_user_3DTZVrsOXX5pW2QRKU3JX4bLhmv");
+        req.baseUri("https://reqres.in");
+        req.basePath("/api/users/2");
+
+        //executing the request
+
+        Response response = req.get();
+        String responsebody = response.getBody().asString();
+        int statuscode = response.getStatusCode();
+
+        System.out.println(responsebody);
+        System.out.println(statuscode);
+        Assert.assertEquals(statuscode,200);
+
+        JsonPath jp = response.jsonPath();
+
+        String firstname = jp.getString("data.first_name");
+        System.out.println("The first name is " +firstname);
+
+        String url = jp.getString("support.url");
+        System.out.println(" The url is "+url);
+
+        // Delete the last name
+
+        Map<String, Object> updatedata = new HashMap<>();
+        updatedata.put("last_name",null);
+
+        RequestSpecification reqtwo = RestAssured.given();
+        req.headers("x-api-key","free_user_3DTZVrsOXX5pW2QRKU3JX4bLhmv");
+        req.baseUri("https://reqres.in");
+        req.basePath("/api/users/2");
+
+        Response responsetwo = reqtwo.patch();
+        String responsebodytwo = responsetwo.getBody().asString();
+        int statuscodetwo = responsetwo.getStatusCode();
+        System.out.println(responsebodytwo);
+        System.out.println(statuscodetwo);
+
+
+
+
+
+    }
+}
